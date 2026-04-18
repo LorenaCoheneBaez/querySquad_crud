@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { crearEmpresa } = require("../controllers/empresasController");
+const { crearEmpresa, mostrarFormularioNuevaEmpresa } = require("../controllers/empresasController");
 
+//ver fomrnulario nueva empresa 
+router.get("/nueva", mostrarFormularioNuevaEmpresa);
 //POST: Alta
 router.post("/", crearEmpresa);
 
