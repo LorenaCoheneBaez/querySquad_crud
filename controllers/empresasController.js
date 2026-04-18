@@ -18,9 +18,29 @@ const crearEmpresa = (req, res) => {
     const empresas = leerEmpresas();
     const { nombre, cuit, rubro, emailContacto, telefono, direccion, personaContacto } = req.body;
 
+    //validaciones y errores
     if (!nombre || !cuit || !rubro || !emailContacto || !telefono || !direccion || !personaContacto) {
         return res.status(400).json({ 
             mensaje: "Error al crear: Por favor complete todos los campos requeridos." 
+        });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailContacto)) {
+        return res.status(400).json({ 
+            mensaje: "Error al crear: El formato del email no es válido." 
+        });
+    }
+    const cuitRegex = /^\d{2}-\d{8}-\d{1}$/;
+    if (!cuitRegex.test(cuit)) {
+        return res.status(400).json({ 
+            mensaje: "Error al crear: El formato del CUIT debe ser XX-XXXXXXXX-X." 
+        });
+    }
+    const telefonoRegex = /^[0-9+\-\s]+$/;
+    if (!telefonoRegex.test(telefono)) {
+        return res.status(400).json({ 
+            mensaje: "Error al crear: El teléfono solo puede contener números, espacios, guiones o el signo '+'." 
         });
     }
 
@@ -44,6 +64,12 @@ const crearEmpresa = (req, res) => {
     });
 };
 
+// GET: Mostrar el formulario
+const mostrarFormularioNuevaEmpresa = (req, res) => {
+    res.render("nueva-empresa"); 
+};
+
 module.exports = {
-    crearEmpresa
+    crearEmpresa,
+    mostrarFormularioNuevaEmpresa
 };

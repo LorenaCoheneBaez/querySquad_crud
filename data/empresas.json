@@ -10,5 +10,17 @@
     "personaContacto": "María Gómez",
     "fechaAlta": "2026-04-18T00:01:26.276Z",
     "activo": true
+  },
+  {
+    "id": 1776472561917,
+    "nombre": "Constructora Q",
+    "cuit": "12345",
+    "rubro": "Constructora",
+    "emailContacto": "q_contrusctora@mail.com.ar",
+    "telefono": "123456",
+    "direccion": "calle 123",
+    "personaContacto": "Juan",
+    "fechaAlta": "2026-04-18T00:36:01.917Z",
+    "activo": false
   }
 ]

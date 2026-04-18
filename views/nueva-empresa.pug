@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title Nueva Empresa - Talento Evolutivo
+  body
+    h1 Registrar Nueva Empresa
+    
+    form(action="/empresas" method="POST")
+      
+      div(style="margin-bottom: 10px;")
+        label(for="nombre") Nombre de la Empresa: 
+        input(type="text" name="nombre" required)
+
+      div(style="margin-bottom: 10px;")
+        label(for="cuit") CUIT: 
+        input(type="text" name="cuit" required)
+
+      div(style="margin-bottom: 10px;")
+        label(for="rubro") Rubro: 
+        input(type="text" name="rubro" required)
+
+      div(style="margin-bottom: 10px;")
+        label(for="emailContacto") Email de Contacto: 
+        input(type="email" name="emailContacto" required)
+
+      div(style="margin-bottom: 10px;")
+        label(for="telefono") Teléfono: 
+        input(type="text" name="telefono" required)
+
+      div(style="margin-bottom: 10px;")
+        label(for="direccion") Dirección: 
+        input(type="text" name="direccion" required)
+
+      div(style="margin-bottom: 10px;")
+        label(for="personaContacto") Persona de Contacto: 
+        input(type="text" name="personaContacto" required)
+
+      button(type="submit") Crear Empresa
