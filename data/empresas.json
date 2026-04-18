@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": 1776470486276,
+    "nombre": "Talento Evolutivo S.A.",
+    "cuit": "30-12345678-9",
+    "rubro": "Recursos Humanos",
+    "emailContacto": "rrhh@talentoevolutivo.com",
+    "telefono": "11-4567-8900",
+    "direccion": "Av. Corrientes 1234, CABA",
+    "personaContacto": "María Gómez",
+    "fechaAlta": "2026-04-18T00:01:26.276Z",
+    "activo": true
+  }
+]
