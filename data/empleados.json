@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "dni": "35123456",
+    "empresaId": 1776470486276, 
+    "activo": true
+  },
+  {
+    "id": 2,
+    "nombre": "María",
+    "apellido": "Gómez",
+    "dni": "40987654",
+    "empresaId": 1776472561917,
+    "activo": true
+  }
+]
