@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const methodOverride = require("method-override");
 const app = express();
 const PORT = 3000;
 
@@ -11,6 +12,12 @@ app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+//Para no tener error con PUT
+app.use(methodOverride(function (req, res) {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        return req.body._method;
+    }
+}));
 
 app.use("/empresas", empresasRoutes);
 app.use("/empleados", empleadosRoutes);

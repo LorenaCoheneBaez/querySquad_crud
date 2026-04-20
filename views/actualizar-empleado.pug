@@ -1,0 +1,52 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="Content-Security-Policy", content="default-src 'self'; connect-src 'self' http://localhost:3000; style-src 'self' 'unsafe-inline';")
+    title Actualizar Empleado - Talento Evolutivo
+  body
+    h1 Actualizar Datos del Empleado
+    
+    //TODO: a(href="/empleados") Volver al Listado de Empleados
+    
+    if empleado
+      h2 Datos del Empleado: #{empleado.nombre} #{empleado.apellido}
+      
+      if error
+        div(style="background-color: #f8d7da; padding: 10px; margin-bottom: 20px; border-radius: 5px; color: #721c24;")
+          p #{error}
+      
+      if !empresas || empresas.length === 0
+        div(style="background-color: #f8d7da; padding: 10px; margin-bottom: 20px; border-radius: 5px; color: #721c24;")
+          strong Advertencia: No hay empresas disponibles en el sistema.
+      
+      form(method="POST", action=`/empleados/${empleado.id}`)
+        input(type="hidden", name="_method", value="PUT")
+        
+        div(style="margin-bottom: 10px;")
+          label(for="nombre") Nombre:
+          input(type="text", name="nombre", value=empleado.nombre, required)
+        
+        div(style="margin-bottom: 10px;")
+          label(for="apellido") Apellido:
+          input(type="text", name="apellido", value=empleado.apellido, required)
+        
+        div(style="margin-bottom: 10px;")
+          label(for="dni") DNI:
+          input(type="text", name="dni", value=empleado.dni, required)
+        
+        div(style="margin-bottom: 10px;")
+          label(for="empresaId") Empresa Asociada:
+          if empresas && empresas.length > 0
+            select(name="empresaId", required)
+              option(value="") Selecciona una empresa
+              each empresa in empresas
+                option(value=empresa.id, selected=(empresa.id === empleado.empresaId)) #{empresa.nombre}
+          else
+            p(style="color: #dc3545;") No hay empresas disponibles para asignar.
+        
+        button(type="submit", style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;") Actualizar Empleado
+    
+    else if error
+      div(style="background-color: #f8d7da; padding: 10px; margin-bottom: 20px; border-radius: 5px; color: #721c24;")
+        p #{error}
