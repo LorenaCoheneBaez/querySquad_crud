@@ -14,6 +14,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/empresas", empresasRoutes);
 app.use("/empleados", empleadosRoutes);
+app.get('/', (req, res) => {
+    res.render('nueva-empresa');
+});
 app.listen(PORT, () => {
     console.log("Servidor corriendo en el puerto " + PORT);
 });

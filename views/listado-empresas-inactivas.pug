@@ -1,0 +1,36 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="Content-Security-Policy", content="default-src 'self'; connect-src 'self' http://localhost:3000; style-src 'self' 'unsafe-inline';")
+    title Listado de Empresas inactivas- Talento Evolutivo
+  body
+    h1 Listado de empresas inactivas
+    
+    //Ir al formulario de nueva empresa
+    a(href="/") Agregar Nueva Empresa
+    br
+    a(href="/empresas") Listado de todas las empresas
+    br
+    a(href="/empresas/listado-empresas-activas") Listado empresas activas
+    
+    ul
+      each empresa in empresas
+        li
+          strong Nombre: #{empresa.nombre}
+          br
+          | CUIT: #{empresa.cuit}
+          br
+          | Rubro: #{empresa.rubro}
+          br
+          | Email: #{empresa.emailContacto}
+          br
+          | Teléfono: #{empresa.telefono}
+          br
+          | Dirección: #{empresa.direccion}
+          br
+          | Persona de Contacto: #{empresa.personaContacto}
+          hr
+    // Si no hay empresas
+    if empresas.length === 0
+      p No hay empresas registradas.

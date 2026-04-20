@@ -69,7 +69,33 @@ const mostrarFormularioNuevaEmpresa = (req, res) => {
     res.render("nueva-empresa"); 
 };
 
+//GET: Listado de empresas
+
+const listarTodasEmpresas = (req, res) => {
+    const empresas = leerEmpresas();
+    res.render("listado-empresas", { empresas });
+};
+
+//GET: Listado de empresas activas
+
+const listarEmpresasActivas = (req, res) => {
+    const empresas = leerEmpresas();
+    const empresasActivas = empresas.filter(empresa => empresa.activo);
+    res.render("listado-empresas-activas", { empresas: empresasActivas });
+}
+
+//GET: Listado de empresas inactivas
+
+const listarEmpresasInactivas = (req, res) => {
+    const empresas = leerEmpresas();
+    const empresasInactivas = empresas.filter(empresa => !empresa.activo);
+    res.render("listado-empresas-inactivas", { empresas: empresasInactivas });
+}
+
 module.exports = {
     crearEmpresa,
-    mostrarFormularioNuevaEmpresa
+    mostrarFormularioNuevaEmpresa,
+    listarTodasEmpresas,
+    listarEmpresasActivas,
+    listarEmpresasInactivas
 };

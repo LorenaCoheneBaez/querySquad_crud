@@ -1,9 +1,14 @@
 doctype html
 html
   head
+    meta(charset="UTF-8")
+    meta(http-equiv="Content-Security-Policy", content="default-src 'self'; connect-src 'self' http://localhost:3000; style-src 'self' 'unsafe-inline';")
     title Nueva Empresa - Talento Evolutivo
   body
     h1 Registrar Nueva Empresa
+    
+    // Ir al listado de empresas
+    a(href="/empresas") Ver Listado de todas las empresas
     
     form(action="/empresas" method="POST")
       

@@ -22,5 +22,17 @@
     "personaContacto": "Juan",
     "fechaAlta": "2026-04-18T00:36:01.917Z",
     "activo": false
+  },
+  {
+    "id": 1776642499384,
+    "nombre": "Panificadora Buen Pan",
+    "cuit": "30-12345333-9",
+    "rubro": "Manufactura",
+    "emailContacto": "rrhh@buenpan.com",
+    "telefono": "11-4567-8300",
+    "direccion": "Av. Falsa 123",
+    "personaContacto": "Mario Rojo",
+    "fechaAlta": "2026-04-19T23:48:19.385Z",
+    "activo": true
   }
 ]
