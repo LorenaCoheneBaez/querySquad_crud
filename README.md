@@ -10,3 +10,32 @@ Aquí estamos desarrollando un sistema backend para gestionar la información de
 
 * **Backend:** Node.js con Express.
 * **Vistas:** Pug (Motor de plantillas para el frontend).
+
+### ¿Cómo instalar el proyecto?
+
+#### Desde la terminal:
+
+- Clonar el proyecto:
+````
+git clone https://github.com/LorenaCoheneBaez/querySquad_crud.git
+````
+### Es necesario instalar las dependencias:
+
+````
+npm install
+````
+### Levantar correr el proyecto: 
+
+````
+npm run dev
+````
+
+## Rutas:
+
+|Página|Ruta|
+|--------|--------|
+|   Registrar Nueva Empresa    |   http://localhost:3000/|
+|     Listado de todas las empresas   |    http://localhost:3000/empresas    |
+|   Listado de empresas inactivas   |    http://localhost:3000/empresas/listado-empresas-inactivas   |
+|    Listado de empresas activas   |    http://localhost:3000/empresas/listado-empresas-activas   |
+| Actualizar Datos del Empleado      |    http://localhost:3000/empleados/actualizar/id    |
