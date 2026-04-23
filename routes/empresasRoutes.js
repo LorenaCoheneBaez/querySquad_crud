@@ -3,7 +3,14 @@ const router = express.Router();
 
 const { 
     crearEmpresa, 
-    mostrarFormularioNuevaEmpresa, listarTodasEmpresas, listarEmpresasActivas, listarEmpresasInactivas} 
+    mostrarFormularioNuevaEmpresa, 
+    listarTodasEmpresas, 
+    listarEmpresasActivas, 
+    listarEmpresasInactivas,
+    cambiarEstadoEmpresa,
+    actualizarEmpresa,
+    mostrarFormularioEditarEmpresa
+} 
 = require("../controllers/empresasController");
 
 //ver fomrnulario nueva empresa 
@@ -16,4 +23,10 @@ router.get("/listado-empresas-activas", listarEmpresasActivas);
 router.get("/listado-empresas-inactivas", listarEmpresasInactivas);
 //GET: Listado de todas las empresas
 router.get("/", listarTodasEmpresas);
+// PUT: Cambiar estado de empresa (activar/desactivar)
+router.put("/:id/estado", cambiarEstadoEmpresa);
+// PUT: Actualizar empresa
+router.put("/:id", actualizarEmpresa);
+// GET: Mostrar formulario de actualización de empresa          
+router.get("/:id/editar", mostrarFormularioEditarEmpresa);
 module.exports = router;

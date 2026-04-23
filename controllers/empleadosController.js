@@ -69,6 +69,13 @@ const actualizarEmpleado = (req, res) => {
         return res.render("actualizar-empleado", { error: "Empleado no encontrado", empresas });
     }
 
+    // Validar algun campo
+    if (!nombre && !apellido && !dni && empresaId === undefined) {
+        return res.status(400).json({
+            mensaje: "Debe enviar al menos un campo para actualizar"
+        });
+    }
+
     // Validar DNI único
     const dniExistente = empleados.find(e => e.dni === dni && e.id !== idParam);
     if (dniExistente) {

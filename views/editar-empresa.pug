@@ -1,0 +1,41 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    title Editar Empresa
+  body
+    h1 Editar Empresa
+
+    form(method="POST", action=`/empresas/${empresa.id}`)
+      input(type="hidden", name="_method", value="PUT")
+
+      div
+        label Nombre:
+        input(type="text", name="nombre", value=empresa.nombre)
+
+      div
+        label CUIT:
+        input(type="text", name="cuit", value=empresa.cuit)
+
+      div
+        label Rubro:
+        input(type="text", name="rubro", value=empresa.rubro)
+
+      div
+        label Email:
+        input(type="text", name="emailContacto", value=empresa.emailContacto)
+
+      div
+        label Teléfono:
+        input(type="text", name="telefono", value=empresa.telefono)
+
+      div
+        label Dirección:
+        input(type="text", name="direccion", value=empresa.direccion)
+
+      div
+        label Persona de contacto:
+        input(type="text", name="personaContacto", value=empresa.personaContacto)
+
+      br
+      button(type="submit") Actualizar Empresa

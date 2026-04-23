@@ -32,7 +32,14 @@ html(lang="es")
           | Persona de Contacto: #{empresa.personaContacto}
           br
           strong Estado: #{empresa.activo ? 'Activo' : 'Inactivo'}
+          // BOTÓN ACTIVAR/DESACTIVAR (FORM)
+          form(method="POST", action=`/empresas/${empresa.id}/estado`)
+            input(type="hidden", name="_method", value="PUT")
+            button(type="submit") #{empresa.activo ? 'Desactivar' : 'Activar'}
+          br
+          a(href=`/empresas/${empresa.id}/editar`) Editar
           hr
+    
     // Si no hay empresas
     if empresas.length === 0
       p No hay empresas registradas.
