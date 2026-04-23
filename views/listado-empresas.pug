@@ -5,13 +5,10 @@ html(lang="es")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title Lista de Empresas
 
-    // Bootstrap
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
 
-    // Bootstrap Icons
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css")
 
-    // Estilos personalizados
     style.
       .bg-finance {
         background-color: #1e3a5f;
@@ -27,16 +24,15 @@ html(lang="es")
       }
 
   body
-    // NAVBAR
     nav.navbar.navbar-expand-lg.navbar-dark.bg-finance
       .container-fluid
         a.navbar-brand(href="#") Query Squad
         .navbar-nav
-          a.nav-link.active(href="/empresas") Lista de Empleados
+          a.nav-link(class=(activePage === 'empresas' ? 'active' : ''), href="/empresas") Empresas
+          a.nav-link(class=(activePage === 'empleados' ? 'active' : ''), href="/empleados") Empleados          
 
     .container.mt-4
 
-      // ALERTAS
       if query && query.msg
         .alert.alert-success.alert-dismissible.fade.show(role="alert")
           if query.msg === 'created'
@@ -53,7 +49,6 @@ html(lang="es")
       h2 Lista de Empresas
       hr
 
-      // BOTONES SUPERIORES
       .d-flex.justify-content-between.align-items-center.mb-3
         a.btn.btn-finance(href="/empresas/nueva")
           i.bi.bi-plus-lg
@@ -63,10 +58,8 @@ html(lang="es")
           a.btn.btn-outline-primary(href="/empresas/listado-empresas-activas") Activas
           a.btn.btn-outline-secondary(href="/empresas/listado-empresas-inactivas") Inactivas
 
-      // Filtro (decorativo)
-      button.btn.btn-light.mb-3 Filtrar datos de empleados
+      button.btn.btn-light.mb-3 Filtrar datos de empresas
 
-      // TABLA
       table.table.table-bordered.table-hover
         thead.table-light
           tr
@@ -89,25 +82,21 @@ html(lang="es")
               td #{empresa.telefono}
               td #{empresa.rubro}
 
-              // ESTADO
               td
                 if empresa.activo
                   span.badge.bg-success Activo
                 else
                   span.badge.bg-secondary Inactivo
 
-              // ACCIONES
               td(style="white-space: nowrap;")
                 .d-flex.gap-2
 
-                  // ✏️ EDITAR
                   a.btn.btn-primary.btn-sm(
                     href=`/empresas/${empresa.id}/editar`,
                     title="Editar empresa"
                   )
                     i.bi.bi-pencil
 
-                  // 🔄 CAMBIAR ESTADO
                   form(method="POST", action=`/empresas/${empresa.id}/estado`)
                     input(type="hidden", name="_method", value="PUT")
                     button.btn.btn-sm(
@@ -120,7 +109,6 @@ html(lang="es")
                       else
                         i.bi.bi-toggle-on
 
-                  // 🗑 ELIMINAR
                   form(method="POST", action=`/empresas/${empresa.id}`)
                     input(type="hidden", name="_method", value="DELETE")
                     button.btn.btn-danger.btn-sm(

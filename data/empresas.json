@@ -9,7 +9,7 @@
     "direccion": "calle 123",
     "personaContacto": "Juan",
     "fechaAlta": "2026-04-18T00:36:01.917Z",
-    "activo": true
+    "activo": false
   },
   {
     "id": 1776642499384,
@@ -21,6 +21,6 @@
     "direccion": "Av. Falsa 123",
     "personaContacto": "Mario Rojo",
     "fechaAlta": "2026-04-19T23:48:19.385Z",
-    "activo": false
+    "activo": true
   }
 ]

@@ -144,9 +144,14 @@ const listarEmpleados = (req, res) => {
         };
     });
 
-    res.render("listado-empleados", { empleados: empleadosConEmpresa });
-};
+    
+    // res.render("listado-empleados", { empleados: empleadosConEmpresa });
 
+    res.render("listado-empleado", { 
+        empleados: empleadosConEmpresa,
+        query: req.query
+    });
+};
 
 module.exports = {
     obtenerEmpleados,

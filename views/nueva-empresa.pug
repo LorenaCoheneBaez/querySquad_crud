@@ -22,7 +22,6 @@ html(lang="es")
       }
 
   body
-    // NAVBAR
     nav.navbar.navbar-expand-lg.navbar-dark.bg-finance
       .container-fluid
         a.navbar-brand(href="#") Query Squad
@@ -34,10 +33,8 @@ html(lang="es")
       h2 Registrar Nueva Empresa
       hr
 
-      // BOTÓN VOLVER
       a.btn.btn-outline-secondary.mb-3(href="/empresas") ← Volver al listado
 
-      // FORMULARIO
       form(action="/empresas" method="POST")
         
         .row
@@ -69,7 +66,6 @@ html(lang="es")
             label.form-label Persona de Contacto
             input.form-control(type="text" name="personaContacto" required)
 
-        // BOTÓN SUBMIT
         button.btn.btn-finance.mt-3(type="submit") Crear Empresa
 
     footer.text-center.mt-4.mb-3

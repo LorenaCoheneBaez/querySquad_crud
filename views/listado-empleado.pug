@@ -5,41 +5,93 @@ html(lang="es")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title Listado de Empleados
 
-    // Bootstrap
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
 
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css")
+
+    style.
+      .bg-finance {
+        background-color: #1e3a5f;
+      }
+      .btn-finance {
+        background-color: #1e3a5f;
+        color: white;
+        border: none;
+      }
+      .btn-finance:hover {
+        background-color: #16324a;
+        color: white;
+      }
+
   body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-finance
+      .container-fluid
+        a.navbar-brand(href="#") Query Squad
+        .navbar-nav
+          a.nav-link(href="/empresas") Empresas
+          a.nav-link.active(href="/empleados") Empleados
+
     .container.mt-4
 
-      h2 Listado de Empleados
-
-      a.btn.btn-secondary.mb-3(href="/") Volver al inicio
-
-      if query && query.msg === 'created'
+      if query && query.msg
         .alert.alert-success.alert-dismissible.fade.show(role="alert")
-          | Empleado creado correctamente
+          if query.msg === 'created'
+            | Empleado creado correctamente
+          else if query.msg === 'updated'
+            | Empleado actualizado correctamente
+          else if query.msg === 'deleted'
+            | Empleado eliminado correctamente
+
           button.btn-close(type="button", data-bs-dismiss="alert")
 
-      ul
-        each empleado in empleados
-          li.mb-3
-            strong Nombre: #{empleado.nombre} #{empleado.apellido}
-            br
-            | DNI: #{empleado.dni}
-            br
-            | Empresa: #{empleado.nombreEmpresa}
-            br
+      h2 Lista de Empleados
+      hr
 
-            a.btn.btn-primary.btn-sm(href=`/empleados/${empleado.id}/editar`) Editar
+      //- .d-flex.justify-content-between.align-items-center.mb-3
+      //-   a.btn.btn-finance(href="/")
+      //-     i.bi.bi-plus-lg
+      //-     |  Nuevo Empleado
+      // cambiar ruta a /empleados/nuevo cuando se cree esa ruta
 
-            form.d-inline(method="POST", action=`/empleados/${empleado.id}`)
-              input(type="hidden", name="_method", value="DELETE")
-              button.btn.btn-danger.btn-sm(
-                type="submit",
-                onclick="return confirm('¿Seguro que querés eliminar este empleado?')"
-              ) Eliminar
+      table.table.table-bordered.table-hover
+        thead.table-light
+          tr
+            th No
+            th Nombre
+            th DNI
+            th Empresa
+            th Acciones
+
+        tbody
+          each empleado, index in empleados
+            tr
+              td #{index + 1}
+              td #{empleado.nombre} #{empleado.apellido}
+              td #{empleado.dni}
+              td #{empleado.nombreEmpresa}
+
+              td(style="white-space: nowrap;")
+                .d-flex.gap-2
+
+                  a.btn.btn-primary.btn-sm(
+                    href=`/empleados/actualizar/${empleado.id}`,
+                    title="Editar empleado"
+                  )
+                    i.bi.bi-pencil
+
+                  form(method="POST", action=`/empleados/${empleado.id}`)
+                    input(type="hidden", name="_method", value="DELETE")
+                    button.btn.btn-danger.btn-sm(
+                      type="submit",
+                      title="Eliminar empleado",
+                      onclick="return confirm('¿Seguro que querés eliminar este empleado?')"
+                    )
+                      i.bi.bi-trash
 
       if empleados.length === 0
         p.text-muted No hay empleados registrados
+
+    footer.text-center.mt-4.mb-3
+      small © Query Squad 2026
 
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")
