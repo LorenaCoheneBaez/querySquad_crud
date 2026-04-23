@@ -2,44 +2,106 @@ doctype html
 html(lang="es")
   head
     meta(charset="UTF-8")
-    meta(http-equiv="Content-Security-Policy", content="default-src 'self'; connect-src 'self' http://localhost:3000; style-src 'self' 'unsafe-inline';")
-    title Listado de Empresas - Talento Evolutivo
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title Lista de Empresas
+
+    // Bootstrap
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+
+    // Estilos personalizados
+    style.
+      .bg-finance {
+        background-color: #1e3a5f;
+      }
+      .btn-finance {
+        background-color: #1e3a5f;
+        color: white;
+        border: none;
+      }
+      .btn-finance:hover {
+        background-color: #16324a;
+        color: white;
+      }
+
   body
-    h1 Listado de todas las Empresas
-    
-    //Ir al formulario de nueva empresa
-    a(href="/") Agregar Nueva Empresa
-    br
-    a(href="/empresas/listado-empresas-inactivas") Listado empresas inactivas
-    br
-    a(href="/empresas/listado-empresas-activas") Listado empresas activas
-    
-    ul
-      each empresa in empresas
-        li
-          strong Nombre: #{empresa.nombre}
-          br
-          | CUIT: #{empresa.cuit}
-          br
-          | Rubro: #{empresa.rubro}
-          br
-          | Email: #{empresa.emailContacto}
-          br
-          | Teléfono: #{empresa.telefono}
-          br
-          | Dirección: #{empresa.direccion}
-          br
-          | Persona de Contacto: #{empresa.personaContacto}
-          br
-          strong Estado: #{empresa.activo ? 'Activo' : 'Inactivo'}
-          // BOTÓN ACTIVAR/DESACTIVAR (FORM)
-          form(method="POST", action=`/empresas/${empresa.id}/estado`)
-            input(type="hidden", name="_method", value="PUT")
-            button(type="submit") #{empresa.activo ? 'Desactivar' : 'Activar'}
-          br
-          a(href=`/empresas/${empresa.id}/editar`) Editar
-          hr
-    
-    // Si no hay empresas
-    if empresas.length === 0
-      p No hay empresas registradas.
+    // NAVBAR
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-finance
+      .container-fluid
+        a.navbar-brand(href="#") Query Squad
+        .navbar-nav
+          a.nav-link.active(href="/empresas") Lista de Empleados
+
+    .container.mt-4
+
+      // ✅ ALERTAS DINÁMICAS
+      if query && query.msg
+        .alert.alert-success.alert-dismissible.fade.show(role="alert")
+          if query.msg === 'created'
+            | Empresa creada correctamente
+          else if query.msg === 'updated'
+            | Empresa actualizada correctamente
+          else if query.msg === 'deleted'
+            | Empresa eliminada correctamente
+          else if query.msg === 'status'
+            | Estado actualizado correctamente
+
+          button.btn-close(type="button", data-bs-dismiss="alert")
+
+      h2 Lista de Empresas
+      hr
+
+      // BOTONES
+      .d-flex.justify-content-between.align-items-center.mb-3
+        a.btn.btn-finance(href="/empresas/nueva") + Nueva Empresa
+
+        .btn-group
+          a.btn.btn-outline-primary(href="/empresas/listado-empresas-activas") Activas
+          a.btn.btn-outline-secondary(href="/empresas/listado-empresas-inactivas") Inactivas
+
+      // Filtro (decorativo)
+      button.btn.btn-light.mb-3 Filtrar datos de empleados
+
+      // TABLA
+      table.table.table-bordered.table-hover
+        thead.table-light
+          tr
+            th No
+            th Cuit
+            th Nombre
+            th Dirección
+            th Teléfono
+            th Cargo
+            th Estado
+            th Acciones
+
+        tbody
+          each empresa, index in empresas
+            tr
+              td #{index + 1}
+              td #{empresa.cuit}
+              td #{empresa.nombre}
+              td #{empresa.direccion}
+              td #{empresa.telefono}
+              td #{empresa.rubro}
+
+              td
+                if empresa.activo
+                  span.badge.bg-success Activo
+                else
+                  span.badge.bg-secondary Inactivo
+
+              td(style="white-space: nowrap;")
+                .d-flex.gap-2
+                  a.btn.btn-primary.btn-sm(href=`/empresas/${empresa.id}/editar`) ✏️
+
+                  form(method="POST", action=`/empresas/${empresa.id}/estado`)
+                    input(type="hidden", name="_method", value="PUT")
+                    button.btn.btn-danger.btn-sm(type="submit") 🗑
+
+      if empresas.length === 0
+        p.text-muted No hay empresas registradas.
+
+    footer.text-center.mt-4.mb-3
+      small © Query Squad 2026
+
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")

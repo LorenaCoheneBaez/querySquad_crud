@@ -9,7 +9,8 @@ const {
     listarEmpresasInactivas,
     cambiarEstadoEmpresa,
     actualizarEmpresa,
-    mostrarFormularioEditarEmpresa
+    mostrarFormularioEditarEmpresa,
+    eliminarEmpresa
 } 
 = require("../controllers/empresasController");
 
@@ -29,4 +30,6 @@ router.put("/:id/estado", cambiarEstadoEmpresa);
 router.put("/:id", actualizarEmpresa);
 // GET: Mostrar formulario de actualización de empresa          
 router.get("/:id/editar", mostrarFormularioEditarEmpresa);
+// DELETE: Eliminar empresa (borrado lógico)
+router.delete("/:id", eliminarEmpresa);
 module.exports = router;

@@ -113,9 +113,46 @@ const actualizarEmpleado = (req, res) => {
     res.redirect("/empleados");
 };
 
+const eliminarEmpleado = (req, res) => {
+    const empleados = leerDatos(rutaEmpleados);
+    const idParam = parseInt(req.params.id);
+
+    const existe = empleados.find(e => e.id === idParam);
+
+    if (!existe) {
+        return res.status(404).json({
+            mensaje: "Empleado no encontrado"
+        });
+    }
+
+    const nuevosEmpleados = empleados.filter(e => e.id !== idParam);
+
+    guardarDatos(rutaEmpleados, nuevosEmpleados);
+
+    res.redirect("/empleados");
+};
+
+const listarEmpleados = (req, res) => {
+    const empleados = leerDatos(rutaEmpleados);
+    const empresas = leerDatos(rutaEmpresas);
+
+    const empleadosConEmpresa = empleados.map(emp => {
+        const empresa = empresas.find(e => e.id === emp.empresaId);
+        return {
+            ...emp,
+            nombreEmpresa: empresa ? empresa.nombre : "Sin empresa"
+        };
+    });
+
+    res.render("listado-empleados", { empleados: empleadosConEmpresa });
+};
+
+
 module.exports = {
     obtenerEmpleados,
     obtenerEmpleadoPorId,
     actualizarEmpleado,
     mostrarFormularioActualizar,
+    eliminarEmpleado,
+    listarEmpleados
 };

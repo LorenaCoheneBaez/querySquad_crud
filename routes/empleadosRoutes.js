@@ -5,12 +5,17 @@ const {
     obtenerEmpleados, 
     obtenerEmpleadoPorId,
     actualizarEmpleado,
-    mostrarFormularioActualizar
+    mostrarFormularioActualizar,
+    listarEmpleados,
+    eliminarEmpleado
 } = require("../controllers/empleadosController");
 
 router.get("/", obtenerEmpleados);
+router.get("/listado", listarEmpleados);
 router.get("/actualizar/:id", mostrarFormularioActualizar);
 router.put("/:id", actualizarEmpleado);
+router.delete("/:id", eliminarEmpleado);
+router.get("/listado", listarEmpleados);
 router.get("/:id", obtenerEmpleadoPorId);
 
 module.exports = router; 

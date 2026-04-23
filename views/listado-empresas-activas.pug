@@ -2,35 +2,74 @@ doctype html
 html(lang="es")
   head
     meta(charset="UTF-8")
-    meta(http-equiv="Content-Security-Policy", content="default-src 'self'; connect-src 'self' http://localhost:3000; style-src 'self' 'unsafe-inline';")
-    title Listado de Empresas activas - Talento Evolutivo
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title Empresas Activas
+
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+
+    style.
+      .bg-finance {
+        background-color: #1e3a5f;
+      }
+      .btn-finance {
+        background-color: #1e3a5f;
+        color: white;
+        border: none;
+      }
+      .btn-finance:hover {
+        background-color: #16324a;
+        color: white;
+      }
+
   body
-    h1 Listado de empresas activas
-    
-    //Ir al formulario de nueva empresa
-    a(href="/") Agregar Nueva Empresa
-    br
-    a(href="/empresas") Listado de todas las empresas
-    br
-    a(href="/empresas/listado-empresas-inactivas") Listado empresas inactivas
-    
-    ul
-      each empresa in empresas
-        li
-          strong Nombre: #{empresa.nombre}
-          br
-          | CUIT: #{empresa.cuit}
-          br
-          | Rubro: #{empresa.rubro}
-          br
-          | Email: #{empresa.emailContacto}
-          br
-          | Teléfono: #{empresa.telefono}
-          br
-          | Dirección: #{empresa.direccion}
-          br
-          | Persona de Contacto: #{empresa.personaContacto}
-          hr
-    // Si no hay empresas
-    if empresas.length === 0
-      p No hay empresas registradas.
+    // NAVBAR
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-finance
+      .container-fluid
+        a.navbar-brand(href="#") Query Squad
+        .navbar-nav
+          a.nav-link(href="/empresas") Todas
+          a.nav-link.active(href="#") Activas
+          a.nav-link(href="/empresas/listado-empresas-inactivas") Inactivas
+
+    .container.mt-4
+      h2 Listado de Empresas Activas
+      hr
+
+      .d-flex.justify-content-between.align-items-center.mb-3
+        a.btn.btn-finance(href="/") + Nueva Empresa
+
+        .btn-group
+          a.btn.btn-outline-primary(href="/empresas") Todas
+          a.btn.btn-primary(href="#") Activas
+          a.btn.btn-outline-secondary(href="/empresas/listado-empresas-inactivas") Inactivas
+
+      // TABLA
+      table.table.table-bordered.table-hover
+        thead.table-light
+          tr
+            th No
+            th Cuit
+            th Nombre
+            th Dirección
+            th Teléfono
+            th Rubro
+            th Email
+            th Contacto
+
+        tbody
+          each empresa, index in empresas
+            tr
+              td #{index + 1}
+              td #{empresa.cuit}
+              td #{empresa.nombre}
+              td #{empresa.direccion}
+              td #{empresa.telefono}
+              td #{empresa.rubro}
+              td #{empresa.emailContacto}
+              td #{empresa.personaContacto}
+
+      if empresas.length === 0
+        p.text-muted No hay empresas activas registradas.
+
+    footer.text-center.mt-4.mb-3
+      small © Query Squad 2026

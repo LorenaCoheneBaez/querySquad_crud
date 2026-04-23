@@ -1,17 +1,5 @@
 [
   {
-    "id": 1776470486276,
-    "nombre": "Talento Evolutivo S.A.",
-    "cuit": "30-12345678-9",
-    "rubro": "Recursos Humanos",
-    "emailContacto": "rrhh@talentoevolutivo.com",
-    "telefono": "11-4567-8900",
-    "direccion": "Av. Corrientes 1234, CABA",
-    "personaContacto": "María Gómez",
-    "fechaAlta": "2026-04-18T00:01:26.276Z",
-    "activo": true
-  },
-  {
     "id": 1776472561917,
     "nombre": "Constructora Q",
     "cuit": "12345",
@@ -21,7 +9,7 @@
     "direccion": "calle 123",
     "personaContacto": "Juan",
     "fechaAlta": "2026-04-18T00:36:01.917Z",
-    "activo": false
+    "activo": true
   },
   {
     "id": 1776642499384,
@@ -34,5 +22,89 @@
     "personaContacto": "Mario Rojo",
     "fechaAlta": "2026-04-19T23:48:19.385Z",
     "activo": true
+  },
+  {
+    "id": 1776910876096,
+    "nombre": "Cloes",
+    "cuit": "20-18582020-8",
+    "rubro": "Tecnologia",
+    "emailContacto": "cloes@it.com",
+    "telefono": "123456",
+    "direccion": "Siempre Viva 1402 Sidney",
+    "personaContacto": "Thomas",
+    "fechaAlta": "2026-04-23T02:21:16.096Z",
+    "activo": true
+  },
+  {
+    "id": 1776911089328,
+    "nombre": "Cloes",
+    "cuit": "20-15897850-2",
+    "rubro": "Tecnologia",
+    "emailContacto": "it@gmail.com",
+    "telefono": "4587974",
+    "direccion": "Sidney",
+    "personaContacto": "Thomas",
+    "fechaAlta": "2026-04-23T02:24:49.328Z",
+    "activo": false
+  },
+  {
+    "id": 1776911238127,
+    "nombre": "Cloes",
+    "cuit": "20-78565058-2",
+    "rubro": "Tecnologia",
+    "emailContacto": "q_contrusctora@mail.com.ar",
+    "telefono": "123456",
+    "direccion": "Sidney",
+    "personaContacto": "Thomas",
+    "fechaAlta": "2026-04-23T02:27:18.127Z",
+    "activo": true
+  },
+  {
+    "id": 1776911548345,
+    "nombre": "Coamtra",
+    "cuit": "12-48510521-2",
+    "rubro": "Automotriz",
+    "emailContacto": "coamtra@automotor.com",
+    "telefono": "1213243",
+    "direccion": "Sidney",
+    "personaContacto": "Roberto",
+    "fechaAlta": "2026-04-23T02:32:28.345Z",
+    "activo": true
+  },
+  {
+    "id": 1776911728677,
+    "nombre": "df",
+    "cuit": "34-45454454-2",
+    "rubro": "dfd",
+    "emailContacto": "dfd@gmail.com",
+    "telefono": "343434343",
+    "direccion": "Av. Corrientes 1234, CABA",
+    "personaContacto": "dfdfd",
+    "fechaAlta": "2026-04-23T02:35:28.677Z",
+    "activo": false
+  },
+  {
+    "id": 1776911938909,
+    "nombre": "dfd",
+    "cuit": "20-43400343-2",
+    "rubro": "Constructora",
+    "emailContacto": "rrhh@talentoevolutivo.com",
+    "telefono": "123456",
+    "direccion": "Av. Corrientes 1234, CABA",
+    "personaContacto": "Juan",
+    "fechaAlta": "2026-04-23T02:38:58.909Z",
+    "activo": true
+  },
+  {
+    "id": 1776911986760,
+    "nombre": "Constructora Q",
+    "cuit": "34-34304333-2",
+    "rubro": "Constructora",
+    "emailContacto": "dfd@gmail.com",
+    "telefono": "3434343",
+    "direccion": "calle 123",
+    "personaContacto": "dfd",
+    "fechaAlta": "2026-04-23T02:39:46.760Z",
+    "activo": false
   }
 ]
