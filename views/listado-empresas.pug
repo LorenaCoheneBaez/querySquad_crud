@@ -8,6 +8,9 @@ html(lang="es")
     // Bootstrap
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
 
+    // Bootstrap Icons
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css")
+
     // Estilos personalizados
     style.
       .bg-finance {
@@ -33,7 +36,7 @@ html(lang="es")
 
     .container.mt-4
 
-      // ✅ ALERTAS DINÁMICAS
+      // ALERTAS
       if query && query.msg
         .alert.alert-success.alert-dismissible.fade.show(role="alert")
           if query.msg === 'created'
@@ -50,9 +53,11 @@ html(lang="es")
       h2 Lista de Empresas
       hr
 
-      // BOTONES
+      // BOTONES SUPERIORES
       .d-flex.justify-content-between.align-items-center.mb-3
-        a.btn.btn-finance(href="/empresas/nueva") + Nueva Empresa
+        a.btn.btn-finance(href="/empresas/nueva")
+          i.bi.bi-plus-lg
+          |  Nueva Empresa
 
         .btn-group
           a.btn.btn-outline-primary(href="/empresas/listado-empresas-activas") Activas
@@ -70,7 +75,7 @@ html(lang="es")
             th Nombre
             th Dirección
             th Teléfono
-            th Cargo
+            th Rubro
             th Estado
             th Acciones
 
@@ -84,19 +89,46 @@ html(lang="es")
               td #{empresa.telefono}
               td #{empresa.rubro}
 
+              // ESTADO
               td
                 if empresa.activo
                   span.badge.bg-success Activo
                 else
                   span.badge.bg-secondary Inactivo
 
+              // ACCIONES
               td(style="white-space: nowrap;")
                 .d-flex.gap-2
-                  a.btn.btn-primary.btn-sm(href=`/empresas/${empresa.id}/editar`) ✏️
 
+                  // ✏️ EDITAR
+                  a.btn.btn-primary.btn-sm(
+                    href=`/empresas/${empresa.id}/editar`,
+                    title="Editar empresa"
+                  )
+                    i.bi.bi-pencil
+
+                  // 🔄 CAMBIAR ESTADO
                   form(method="POST", action=`/empresas/${empresa.id}/estado`)
                     input(type="hidden", name="_method", value="PUT")
-                    button.btn.btn-danger.btn-sm(type="submit") 🗑
+                    button.btn.btn-sm(
+                      type="submit",
+                      class=empresa.activo ? 'btn-outline-danger' : 'btn-outline-success',
+                      title=empresa.activo ? 'Desactivar empresa' : 'Activar empresa'
+                    )
+                      if empresa.activo
+                        i.bi.bi-toggle-off
+                      else
+                        i.bi.bi-toggle-on
+
+                  // 🗑 ELIMINAR
+                  form(method="POST", action=`/empresas/${empresa.id}`)
+                    input(type="hidden", name="_method", value="DELETE")
+                    button.btn.btn-danger.btn-sm(
+                      type="submit",
+                      title="Eliminar empresa",
+                      onclick="return confirm('¿Seguro que querés eliminar esta empresa?')"
+                    )
+                      i.bi.bi-trash
 
       if empresas.length === 0
         p.text-muted No hay empresas registradas.
