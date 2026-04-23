@@ -36,6 +36,7 @@ npm run dev
 |--------|--------|
 |   Registrar Nueva Empresa    |   http://localhost:3000/|
 |     Listado de todas las empresas   |    http://localhost:3000/empresas    |
-|   Listado de empresas inactivas   |    http://localhost:3000/empresas/listado-empresas-inactivas   |
 |    Listado de empresas activas   |    http://localhost:3000/empresas/listado-empresas-activas   |
+|   Listado de empresas inactivas   |    http://localhost:3000/empresas/listado-empresas-inactivas   |
+| Actualizar Estado de la Empresa      |    http://localhost:3000/empresas?msg=status    |
 | Actualizar Datos del Empleado      |    http://localhost:3000/empleados/actualizar/id    |
