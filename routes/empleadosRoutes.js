@@ -24,15 +24,10 @@ router.get("/actualizar/:id", mostrarFormularioActualizar);
 
 router.put("/:id", actualizarEmpleado);
 
-
 router.delete("/:id", eliminarEmpleado);
 
 router.get("/:id", obtenerEmpleadoPorId);
 
-
-
-
-
-// router.post("/", crearEmpleado);
+router.post("/", crearEmpleado);
 
 module.exports = router;
