@@ -68,6 +68,7 @@ const crearEmpresa = (req, res) => {
     guardarEmpresas(empresas);
     
     res.redirect("/empresas?msg=created");
+};
 
 // GET: Mostrar el formulario
 const mostrarFormularioNuevaEmpresa = (req, res) => {
