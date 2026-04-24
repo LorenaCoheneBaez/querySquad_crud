@@ -10,6 +10,27 @@ const guardarDatos = (ruta, datos) => {
     fs.writeFileSync(ruta, JSON.stringify(datos, null, 2));
 };
 
+const crearEmpleado = (req, res) => {
+    const empleados = leerDatos(rutaEmpleados);
+
+    const { nombre, apellido, dni, empresa, salario } = req.body;
+
+    const nuevoEmpleado = {
+        id: empleados.length ? empleados[empleados.length - 1].id + 1 : 1,
+        nombre,
+        apellido,
+        dni,
+        empresaId: parseInt(empresa),
+        salario: parseFloat(salario),
+        activo: true
+    };
+
+    empleados.push(nuevoEmpleado);
+    guardarDatos(rutaEmpleados, empleados);
+
+    return res.redirect("/empleados?msg=created");
+};
+
 //Obtener TODOS los empleados
 const obtenerEmpleados = (req, res) => {
     const empleados = leerDatos(rutaEmpleados).filter(e => e.activo);
@@ -109,8 +130,11 @@ const actualizarEmpleado = (req, res) => {
     // Guardar cambios
     guardarDatos(rutaEmpleados, empleados);
 
-    // Redirigir al listado
-    res.redirect("/empleados");
+    // // Redirigir al listado
+    // res.redirect("/empleados");
+
+    return res.redirect("/empleados?msg=updated");
+
 };
 
 const eliminarEmpleado = (req, res) => {
@@ -129,7 +153,9 @@ const eliminarEmpleado = (req, res) => {
 
     guardarDatos(rutaEmpleados, nuevosEmpleados);
 
-    res.redirect("/empleados");
+    // res.redirect("/empleados");
+    
+    return res.redirect("/empleados?msg=deleted");
 };
 
 const listarEmpleados = (req, res) => {
@@ -144,9 +170,6 @@ const listarEmpleados = (req, res) => {
         };
     });
 
-    
-    // res.render("listado-empleados", { empleados: empleadosConEmpresa });
-
     res.render("listado-empleado", { 
         empleados: empleadosConEmpresa,
         query: req.query
@@ -154,6 +177,7 @@ const listarEmpleados = (req, res) => {
 };
 
 module.exports = {
+    crearEmpleado,
     obtenerEmpleados,
     obtenerEmpleadoPorId,
     actualizarEmpleado,

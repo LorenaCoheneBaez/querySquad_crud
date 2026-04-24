@@ -12,7 +12,16 @@
     "nombre": "María",
     "apellido": "Gómez",
     "dni": "40987654",
+    "empresaId": 1776642499384,
+    "activo": true
+  },
+  {
+    "id": 3,
+    "nombre": "Thomas",
+    "apellido": "Rial",
+    "dni": "25893645",
     "empresaId": 1776472561917,
+    "salario": 15000,
     "activo": true
   }
 ]
