@@ -10,6 +10,8 @@ const empleadosRoutes = require("./routes/empleadosRoutes");
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //Para no tener error con PUT
@@ -22,7 +24,7 @@ app.use(methodOverride(function (req, res) {
 app.use("/empresas", empresasRoutes);
 app.use("/empleados", empleadosRoutes);
 app.get('/', (req, res) => {
-    res.render('nueva-empresa');
+    res.render('login');
 });
 app.listen(PORT, () => {
     console.log("Servidor corriendo en el puerto " + PORT);

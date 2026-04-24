@@ -14,8 +14,11 @@ const {
 } 
 = require("../controllers/empresasController");
 
-//ver fomrnulario nueva empresa 
-router.get("/nueva", mostrarFormularioNuevaEmpresa);
+router.get("/nueva", (req, res) => {
+    res.render("nueva-empresa");
+});
+// //ver fomrnulario nueva empresa 
+// router.get("/nueva", mostrarFormularioNuevaEmpresa);
 //POST: Alta
 router.post("/", crearEmpresa);
 //GET: Listado de empresas activas
