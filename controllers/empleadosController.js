@@ -12,15 +12,30 @@ const guardarDatos = (ruta, datos) => {
 
 const crearEmpleado = (req, res) => {
     const empleados = leerDatos(rutaEmpleados);
+    const empresas = leerDatos(rutaEmpresas);
 
     const { nombre, apellido, dni, empresa, salario } = req.body;
+    const empresaIdRecibido = parseInt(empresa);
+
+    //Verificación de empresa
+    const empresaExiste = empresas.find(e => e.id === empresaIdRecibido);
+
+    if (!empresaExiste) {
+        return res.status(404).render("error-nuevo-empleado", { 
+            mensaje: "La empresa con ID " + empresaIdRecibido + " no existe en nuestra base de datos." 
+        });
+        // return res.status(404).json({ 
+        //     mensaje: "Error: La empresa seleccionada no existe. No se puede crear el empleado." 
+        // });
+
+    }
 
     const nuevoEmpleado = {
         id: empleados.length ? empleados[empleados.length - 1].id + 1 : 1,
         nombre,
         apellido,
         dni,
-        empresaId: parseInt(empresa),
+        empresaId: empresaIdRecibido,
         salario: parseFloat(salario),
         activo: true
     };

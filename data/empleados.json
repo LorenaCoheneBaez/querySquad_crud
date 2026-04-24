@@ -23,5 +23,32 @@
     "empresaId": 1776472561917,
     "salario": 15000,
     "activo": true
+  },
+  {
+    "id": 5,
+    "nombre": "cris",
+    "apellido": "galvez",
+    "dni": "122121",
+    "empresaId": 1776472561917,
+    "salario": null,
+    "activo": true
+  },
+  {
+    "id": 6,
+    "nombre": "Ana",
+    "apellido": "Galvez",
+    "dni": "131231",
+    "empresaId": 1776472561917,
+    "salario": null,
+    "activo": true
+  },
+  {
+    "id": 7,
+    "nombre": "hector",
+    "apellido": "rodriguez",
+    "dni": "1212",
+    "empresaId": 1776642499384,
+    "salario": null,
+    "activo": true
   }
 ]
