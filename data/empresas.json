@@ -22,5 +22,17 @@
     "personaContacto": "Mario Rojo",
     "fechaAlta": "2026-04-19T23:48:19.385Z",
     "activo": false
+  },
+  {
+    "id": 1777073068223,
+    "nombre": "anita srl",
+    "cuit": "27-21111111-1",
+    "rubro": "Comestible",
+    "emailContacto": "anita@gmail.com",
+    "telefono": "12331212",
+    "direccion": "quien sabe 123",
+    "personaContacto": "anita",
+    "fechaAlta": "2026-04-24T23:24:28.223Z",
+    "activo": false
   }
 ]

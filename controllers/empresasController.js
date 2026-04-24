@@ -201,10 +201,16 @@ const eliminarEmpresa = (req, res) => {
         });
     }
 
-    const nuevasEmpresas = empresas.filter(e => e.id !== idParam);
-    guardarEmpresas(nuevasEmpresas);
+    empresas[empresaIndex].activo = false;
 
-    res.redirect("/empresas?msg=deleted");
+    guardarEmpresas(empresas);
+
+    //res.redirect("/empresas?msg=deleted");
+    return res.status(200).json({
+        mensaje: "Empresa desactivada correctamente",
+        id: idParam,
+        activo: false
+    });
 
 };
 
