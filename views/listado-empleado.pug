@@ -2,11 +2,11 @@ doctype html
 html(lang="es")
   head
     meta(charset="UTF-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
     title Listado de Empleados
 
-    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
-    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css")
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css")
 
     style.
       .bg-finance {
@@ -25,7 +25,7 @@ html(lang="es")
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-finance
       .container-fluid
-        a.navbar-brand(href="#") Query Squad
+        a.navbar-brand(href="/") Query Squad
         .navbar-nav
           a.nav-link(href="/empresas") Empresas
           a.nav-link.active(href="/empleados") Empleados
@@ -34,13 +34,10 @@ html(lang="es")
 
       if query && query.msg
         .alert.alert-success.alert-dismissible.fade.show(role="alert")
-
           if query.msg === 'created'
             | Empleado creado correctamente
-
           else if query.msg === 'updated'
             | Empleado actualizado correctamente
-
           else if query.msg === 'deleted'
             | Empleado eliminado correctamente
 
@@ -53,8 +50,17 @@ html(lang="es")
         a.btn.btn-finance(href="/empleados/nuevo")
           | Nuevo Empleado
 
-      .mb-3
-        button.btn.btn-light Filtrar por nombre del Empleado
+        form(method="GET", action="/empleados")
+          .input-group.mb-3(style="max-width: 400px;")
+            input.form-control(
+              type="text",
+              name="nombre",
+              placeholder="Buscar empleado...",
+              value=query && query.nombre ? query.nombre : ''
+            )
+            button.btn.btn-outline-secondary(type="submit")
+              i.bi.bi-search
+              |  Buscar
 
       table.table.table-bordered.table-hover
         thead.table-light
@@ -82,7 +88,7 @@ html(lang="es")
                     i.bi.bi-pencil
 
                   form(method="POST", action=`/empleados/${empleado.id}`)
-                    input(type="hidden" name="_method" value="DELETE")
+                    input(type="hidden", name="_method", value="DELETE")
                     button.btn.btn-danger.btn-sm(
                       type="submit",
                       title="Eliminar empleado",

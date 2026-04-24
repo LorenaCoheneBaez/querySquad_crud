@@ -67,15 +67,7 @@ const crearEmpresa = (req, res) => {
     empresas.push(nuevaEmpresa);
     guardarEmpresas(empresas);
     
-    // ✅ CORRECTO
     res.redirect("/empresas?msg=created");
-
-    // ❌ NO USAR (lo dejo comentado como pediste)
-    // res.status(201).json({
-    //     mensaje: "Empresa creada exitosamente",
-    //     empresa: nuevaEmpresa
-    // });
-};
 
 // GET: Mostrar el formulario
 const mostrarFormularioNuevaEmpresa = (req, res) => {
@@ -86,11 +78,8 @@ const mostrarFormularioNuevaEmpresa = (req, res) => {
 const listarTodasEmpresas = (req, res) => {
     const empresas = leerEmpresas();
 
-    // ✅ IMPORTANTE: pasar query
     res.render("listado-empresas", { empresas, query: req.query });
 
-    // ❌ antes estaba así
-    // res.render("listado-empresas", { empresas });
 };
 
 // GET: Listado de empresas activas
@@ -98,7 +87,6 @@ const listarEmpresasActivas = (req, res) => {
     const empresas = leerEmpresas();
     const empresasActivas = empresas.filter(empresa => empresa.activo);
 
-    // ✅ agregado query
     res.render("listado-empresas-activas", { 
         empresas: empresasActivas, 
         query: req.query 
@@ -110,7 +98,6 @@ const listarEmpresasInactivas = (req, res) => {
     const empresas = leerEmpresas();
     const empresasInactivas = empresas.filter(empresa => !empresa.activo);
 
-    // ✅ agregado query
     res.render("listado-empresas-inactivas", { 
         empresas: empresasInactivas, 
         query: req.query 
@@ -133,14 +120,8 @@ const cambiarEstadoEmpresa = (req, res) => {
     empresas[empresaIndex].activo = !empresas[empresaIndex].activo;
     guardarEmpresas(empresas);
 
-    // ✅ CORRECTO
     res.redirect("/empresas?msg=status");
 
-    // ❌ NO USAR
-    // res.json({
-    //     mensaje: "Estado actualizado correctamente",
-    //     empresa: empresas[empresaIndex]
-    // });
 };
 
 // PUT: Actualizar empresa
@@ -179,14 +160,8 @@ const actualizarEmpresa = (req, res) => {
 
     guardarEmpresas(empresas);
 
-    // ✅ CORRECTO
     res.redirect("/empresas?msg=updated");
 
-    // ❌ NO USAR
-    // res.json({
-    //     mensaje: "Empresa actualizada correctamente",
-    //     empresa: empresas[empresaIndex]
-    // });
 };
 
 // GET: Form editar
@@ -228,13 +203,8 @@ const eliminarEmpresa = (req, res) => {
     const nuevasEmpresas = empresas.filter(e => e.id !== idParam);
     guardarEmpresas(nuevasEmpresas);
 
-    // ✅ CORRECTO
     res.redirect("/empresas?msg=deleted");
 
-    // ❌ NO USAR
-    // res.json({
-    //     mensaje: "Empresa eliminada correctamente"
-    // });
 };
 
 module.exports = {
