@@ -206,10 +206,13 @@ const eliminarEmpresa = (req, res) => {
     guardarEmpresas(empresas);
 
     //res.redirect("/empresas?msg=deleted");
-    return res.status(200).json({
-        mensaje: "Empresa desactivada correctamente",
-        id: idParam,
-        activo: false
+    // return res.status(200).json({
+    //     mensaje: "Empresa desactivada correctamente",
+    //     id: idParam,
+    //     activo: false
+    // });
+    res.render("desactivar-empresa", { 
+        mensaje: "La empresa ha sido desactivada correctamente." 
     });
 
 };
