@@ -90,14 +90,20 @@ html(lang="es")
                   form(method="POST", action=`/empleados/${empleado.id}`)
                     input(type="hidden", name="_method", value="DELETE")
                     button.btn.btn-danger.btn-sm(
-                      type="submit",
+                      type="button",
                       title="Eliminar empleado",
-                      onclick="return confirm('¿Seguro que querés eliminar este empleado?')"
+                      data-bs-toggle="modal",
+                      data-bs-target="#confirmarEliminarEmpleadoModal",
+                      data-empleado-id=empleado.id,
+                      data-empleado-nombre=empleado.nombre,
+                      data-empleado-apellido=empleado.apellido
                     )
                       i.bi.bi-trash
 
       if empleados.length === 0
         p.text-muted No hay empleados registrados
+
+    include modal-eliminar-empleado
 
     footer.text-center.mt-4.mb-3
       small © Query Squad 2026
