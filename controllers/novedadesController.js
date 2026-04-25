@@ -4,6 +4,7 @@ const Novedad = require("../models/Novedad");
 
 const rutaNovedades = path.join(__dirname, "../data/novedades.json");
 const rutaEmpleados = path.join(__dirname, "../data/empleados.json");
+const rutaEmpresas = path.join(__dirname, "../data/empresas.json");
 
 const leerDatos = (ruta) => JSON.parse(fs.readFileSync(ruta, "utf-8"));
 
@@ -15,19 +16,34 @@ const guardarNovedades = (novedades) => {
 const listarNovedades = (req, res) => {
     const novedades = leerDatos(rutaNovedades);
     const empleados = leerDatos(rutaEmpleados);
+    const empresas = leerDatos(rutaEmpresas);
 
-    const novedadesConEmpleado = novedades.map(nov => {
-        const empleado = empleados.find(e => e.id === nov.empleadoId);
+    const empleadosConEmpresa = empleados.map((emp) => {
+        const empresa = empresas.find((e) => e.id === emp.empresaId);
+        return {
+            ...emp,
+            nombreEmpresa: empresa ? empresa.nombre : "Sin empresa",
+        };
+    });
+
+    const novedadesConEmpleado = novedades.map((nov) => {
+        const empleado = empleados.find((e) => e.id === nov.empleadoId);
+        const empresa = empleado
+            ? empresas.find((e) => e.id === empleado.empresaId)
+            : null;
         return {
             ...nov,
-            nombreEmpleado: empleado ? `${empleado.nombre} ${empleado.apellido}` : "Empleado no encontrado"
+            nombreEmpleado: empleado
+                ? `${empleado.nombre} ${empleado.apellido}`
+                : "Empleado no encontrado",
+            nombreEmpresa: empresa ? empresa.nombre : "Sin empresa",
         };
     });
 
     res.render("listado-novedades", {
         novedades: novedadesConEmpleado,
-        empleados,
-        query: req.query
+        empleados: empleadosConEmpresa,
+        query: req.query,
     });
 };
 

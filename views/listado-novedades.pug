@@ -37,7 +37,7 @@ html(lang="es")
                 select.form-select(name="empleadoId", id="empleadoId", required)
                   option(value="") Seleccionar empleado...
                   each empleado in empleados
-                    option(value=empleado.id) #{empleado.nombre} #{empleado.apellido} (ID: #{empleado.id})
+                    option(value=empleado.id) #{empleado.nombreEmpresa} — #{empleado.nombre} #{empleado.apellido}
 
               .col-md-3
                 label.form-label(for="tipo") Tipo
@@ -71,6 +71,7 @@ html(lang="es")
           tr
             th ID
             th Empleado
+            th Empresa
             th Tipo
             th Descripción
             th Fecha
@@ -80,6 +81,7 @@ html(lang="es")
             tr
               td #{novedad.id}
               td #{novedad.nombreEmpleado}
+              td #{novedad.nombreEmpresa}
               td #{novedad.tipo}
               td #{novedad.descripcion}
               td #{novedad.fecha}
