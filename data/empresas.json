@@ -9,7 +9,7 @@
     "direccion": "calle 123",
     "personaContacto": "Juan",
     "fechaAlta": "2026-04-18T00:36:01.917Z",
-    "activo": true
+    "activo": false
   },
   {
     "id": 1776642499384,
@@ -33,6 +33,18 @@
     "direccion": "quien sabe 123",
     "personaContacto": "anita",
     "fechaAlta": "2026-04-24T23:24:28.223Z",
+    "activo": true
+  },
+  {
+    "id": 1777130042968,
+    "nombre": "Innevo",
+    "cuit": "12-12345678-9",
+    "rubro": "Software",
+    "emailContacto": "innevo@gmail.com",
+    "telefono": "12345",
+    "direccion": "Casa 123",
+    "personaContacto": "Montontito Flores",
+    "fechaAlta": "2026-04-25T15:14:02.968Z",
     "activo": false
   }
 ]

@@ -1,0 +1,33 @@
+// Modal confirmación eliminación
+.modal.fade#confirmarEliminarModal(tabindex="-1", aria-labelledby="confirmarEliminarLabel", aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title#confirmarEliminarLabel Confirmar eliminación
+        button.btn-close(type="button", data-bs-dismiss="modal", aria-label="Cerrar")
+      .modal-body
+        p.mb-2
+          | ¿Estás seguro de querer eliminar la empresa 
+          strong#nombreEmpresaModal
+          | ?
+        p.text-muted.mb-0 Si la empresa tiene empleados asociados, se informará conflicto y se desactivará el acceso.
+      .modal-footer
+        button.btn.btn-secondary(type="button", data-bs-dismiss="modal") Cancelar
+        form#formEliminarEmpresa(method="POST", action="")
+          input(type="hidden", name="_method", value="DELETE")
+          button.btn.btn-danger(type="submit") Confirmar
+
+script.
+  document.addEventListener('DOMContentLoaded', function () {
+    const modalEliminar = document.getElementById('confirmarEliminarModal');
+    if (!modalEliminar) return;
+
+    modalEliminar.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget;
+      const empresaId = button.getAttribute('data-empresa-id');
+      const empresaNombre = button.getAttribute('data-empresa-nombre');
+
+      document.getElementById('nombreEmpresaModal').textContent = empresaNombre || '';
+      document.getElementById('formEliminarEmpresa').setAttribute('action', `/empresas/${empresaId}`);
+    });
+  });
