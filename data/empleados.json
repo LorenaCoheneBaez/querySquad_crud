@@ -41,14 +41,5 @@
     "empresaId": 1776472561917,
     "salario": null,
     "activo": true
-  },
-  {
-    "id": 7,
-    "nombre": "hector",
-    "apellido": "rodriguez",
-    "dni": "1212",
-    "empresaId": 1776642499384,
-    "salario": null,
-    "activo": true
   }
 ]

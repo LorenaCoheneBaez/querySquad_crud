@@ -6,6 +6,7 @@ const PORT = 3000;
 
 const empresasRoutes = require("./routes/empresasRoutes");
 const empleadosRoutes = require("./routes/empleadosRoutes");
+const novedadesRoutes = require("./routes/novedadesRoutes");
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +24,7 @@ app.use(methodOverride(function (req, res) {
 
 app.use("/empresas", empresasRoutes);
 app.use("/empleados", empleadosRoutes);
+app.use("/novedades", novedadesRoutes);
 app.get('/', (req, res) => {
     res.render('login');
 });

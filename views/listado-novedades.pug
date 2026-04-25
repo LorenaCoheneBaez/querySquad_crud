@@ -1,0 +1,98 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title Listado de Novedades
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css")
+    style.
+      .bg-finance { background-color: #1e3a5f; }
+
+  body
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-finance
+      .container-fluid
+        a.navbar-brand(href="/") Query Squad
+        .navbar-nav
+          a.nav-link(href="/empresas") Empresas
+          a.nav-link(href="/empleados") Empleados
+          a.nav-link.active(href="/novedades") Novedades
+
+    .container.mt-4
+      if query && query.msg === 'created'
+        .alert.alert-success.alert-dismissible.fade.show(role="alert")
+          | Novedad creada correctamente
+          button.btn-close(type="button", data-bs-dismiss="alert")
+
+      .d-flex.justify-content-between.align-items-center.mb-3
+        h2.mb-0 Novedades
+
+      .card.mb-4
+        .card-body
+          h5.card-title.mb-3 Registrar nueva novedad
+          form(method="POST", action="/novedades")
+            .row.g-3
+              .col-md-4
+                label.form-label(for="empleadoId") Empleado
+                select.form-select(name="empleadoId", id="empleadoId", required)
+                  option(value="") Seleccionar empleado...
+                  each empleado in empleados
+                    option(value=empleado.id) #{empleado.nombre} #{empleado.apellido} (ID: #{empleado.id})
+
+              .col-md-3
+                label.form-label(for="tipo") Tipo
+                select.form-select(name="tipo", id="tipo", required)
+                  option(value="") Seleccionar tipo...
+                  option(value="Licencia") Licencia
+                  option(value="Tardanza") Tardanza
+                  option(value="Ausencia") Ausencia
+                  option(value="Sanción") Sanción
+                  option(value="Cambio de puesto") Cambio de puesto
+                  option(value="Observación") Observación
+
+              .col-md-3
+                label.form-label(for="fecha") Fecha
+                input.form-control(type="date", name="fecha", id="fecha", required)
+
+              .col-md-12
+                label.form-label(for="descripcion") Descripción
+                textarea.form-control(name="descripcion", id="descripcion", rows="3", required)
+
+              .col-12
+                button.btn.btn-primary(type="submit")
+                  i.bi.bi-plus-lg
+                  |  Agregar novedad
+
+      .d-flex.justify-content-between.align-items-center.mb-3
+        h5.mb-3 Listado de Novedades
+
+      table.table.table-bordered.table-hover
+        thead.table-light
+          tr
+            th ID
+            th Empleado
+            th Tipo
+            th Descripción
+            th Fecha
+            th Estado
+        tbody
+          each novedad in novedades
+            tr
+              td #{novedad.id}
+              td #{novedad.nombreEmpleado}
+              td #{novedad.tipo}
+              td #{novedad.descripcion}
+              td #{novedad.fecha}
+              td
+                if novedad.activo
+                  span.badge.bg-success Activa
+                else
+                  span.badge.bg-secondary Inactiva
+
+      if novedades.length === 0
+        p.text-muted No hay novedades registradas.
+
+    footer.text-center.mt-4.mb-3
+      small © Query Squad 2026
+
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")

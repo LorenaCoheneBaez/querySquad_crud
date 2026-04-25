@@ -1,0 +1,36 @@
+// Modal confirmación eliminación de empleado
+.modal.fade#confirmarEliminarEmpleadoModal(tabindex="-1", aria-labelledby="confirmarEliminarEmpleadoLabel", aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title#confirmarEliminarEmpleadoLabel Confirmar eliminación
+        button.btn-close(type="button", data-bs-dismiss="modal", aria-label="Cerrar")
+      .modal-body
+        p.mb-2
+          | ¿Estás seguro de querer eliminar al empleado 
+          strong#nombreEmpleadoModal
+          | ?
+      .modal-footer
+        button.btn.btn-secondary(type="button", data-bs-dismiss="modal") Cancelar
+        form#formEliminarEmpleado(method="POST", action="")
+          input(type="hidden", name="_method", value="DELETE")
+          button.btn.btn-danger(type="submit") Confirmar eliminación
+
+script.
+  document.addEventListener('DOMContentLoaded', function () {
+    const modalEliminarEmpleado = document.getElementById('confirmarEliminarEmpleadoModal');
+    if (!modalEliminarEmpleado) return;
+
+    modalEliminarEmpleado.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget;
+      const empleadoId = button.getAttribute('data-empleado-id');
+      const empleadoNombre = button.getAttribute('data-empleado-nombre');
+      const empleadoApellido = button.getAttribute('data-empleado-apellido');
+
+      document.getElementById('nombreEmpleadoModal').textContent =
+        `${empleadoNombre || ''} ${empleadoApellido || ''}`.trim();
+
+      document.getElementById('formEliminarEmpleado')
+        .setAttribute('action', `/empleados/${empleadoId}`);
+    });
+  });
