@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "empleadoId": 1,
+    "tipo": "Licencia",
+    "descripcion": "Licencia por enfermedad",
+    "fecha": "2026-04-25",
+    "activo": true
+  },
+  {
+    "id": 2,
+    "empleadoId": 2,
+    "tipo": "Tardanza",
+    "descripcion": "Ingreso 20 minutos tarde",
+    "fecha": "2026-04-24",
+    "activo": true
+  },
+  {
+    "id": 3,
+    "empleadoId": 5,
+    "tipo": "Cambio de puesto",
+    "descripcion": "Se cambió de puesto",
+    "fecha": "2026-04-22",
+    "activo": true
+  }
+]
