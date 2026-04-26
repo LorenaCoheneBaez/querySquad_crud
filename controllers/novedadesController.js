@@ -40,6 +40,11 @@ const listarNovedades = (req, res) => {
         };
     });
 
+    const accept = req.get("accept") || "";
+    if (accept.includes("application/json")) {
+        return res.status(200).json(novedadesConEmpleado);
+    }
+
     res.render("listado-novedades", {
         novedades: novedadesConEmpleado,
         empleados: empleadosConEmpresa,
@@ -47,12 +52,14 @@ const listarNovedades = (req, res) => {
     });
 };
 
-// POST: Crear novedad (te queda base para crecer el módulo)
+// POST: Crear novedad 
 const crearNovedad = (req, res) => {
     const novedades = leerDatos(rutaNovedades);
     const empleados = leerDatos(rutaEmpleados);
 
     const { empleadoId, tipo, descripcion, fecha } = req.body;
+    const accept = req.get("accept") || "";
+    const quiereJson = accept.includes("application/json");
 
     if (!empleadoId || !tipo || !descripcion || !fecha) {
         return res.status(400).json({
@@ -62,6 +69,7 @@ const crearNovedad = (req, res) => {
 
     const empleadoExiste = empleados.find(e => e.id === parseInt(empleadoId));
     if (!empleadoExiste) {
+
         return res.status(404).json({
             mensaje: "Empleado no encontrado"
         });
@@ -77,6 +85,13 @@ const crearNovedad = (req, res) => {
 
     novedades.push(nuevaNovedad);
     guardarNovedades(novedades);
+
+    if (quiereJson) {
+        return res.status(201).json({
+            mensaje: "Novedad creada correctamente",
+            novedad: nuevaNovedad
+        });
+    }
 
     return res.redirect("/novedades?msg=created");
 };

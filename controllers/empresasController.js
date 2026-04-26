@@ -198,6 +198,14 @@ const eliminarEmpresa = (req, res) => {
     if (tieneEmpleados) {
         empresas[empresaIndex].activo = false;
         guardarEmpresas(empresas);
+
+        const accept = req.get("accept") || "";
+        if (accept.includes("application/json")) {
+          return res.status(409).json({
+            mensaje: "No se puede eliminar la empresa porque tiene empleados asociados. Se desactivará el acceso."
+          });
+        }
+
         return res.status(409).render("conflicto-empresa", 
             { mensaje: "No se puede eliminar la empresa porque tiene empleados asociados. Se desactivará el acceso." })
         
