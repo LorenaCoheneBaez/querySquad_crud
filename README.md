@@ -32,6 +32,7 @@ npm run dev
 
 ## Acceso:
 Usuario: admin
+br
 Contraseña: 1234
 
 ## Rutas:
