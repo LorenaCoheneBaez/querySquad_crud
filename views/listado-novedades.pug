@@ -10,13 +10,7 @@ html(lang="es")
       .bg-finance { background-color: #1e3a5f; }
 
   body
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-finance
-      .container-fluid
-        a.navbar-brand(href="/") Query Squad
-        .navbar-nav
-          a.nav-link(href="/empresas") Empresas
-          a.nav-link(href="/empleados") Empleados
-          a.nav-link.active(href="/novedades") Novedades
+    include header
 
     .container.mt-4
       if query && query.msg === 'created'

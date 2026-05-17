@@ -30,6 +30,10 @@ npm install
 npm run dev
 ````
 
+## Acceso:
+Usuario: admin
+Contraseña: 1234
+
 ## Rutas:
 
 |Página|Ruta|
@@ -43,3 +47,4 @@ npm run dev
 | Listado de todos los Empleados      |    http://localhost:3000/empleados    |
 | Registrar Empleado nuevo      |    http://localhost:3000/empleados/nuevo   |
 | Actualizar Datos del Empleado      |    http://localhost:3000/empleados/actualizar/id    |
+

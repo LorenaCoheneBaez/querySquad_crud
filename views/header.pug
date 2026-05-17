@@ -1,0 +1,44 @@
+style.
+    .logout-btn {
+        display: inline-block;
+        padding: 10px 18px;
+        background: #dc3545;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: 0.2s ease;
+        margin: 0 10px;
+      }
+
+      .logout-btn:hover {
+        background: #bb2d3b;
+      }
+
+nav.navbar.navbar-expand-lg.navbar-dark.bg-finance
+  .container-fluid
+
+    a.navbar-brand(href="/empresas") Query Squad
+
+    .navbar-nav
+
+      a.nav-link(
+        class=(activePage === 'empresas' ? 'active' : ''),
+        href="/empresas"
+      )
+        | Empresas
+
+      a.nav-link(
+        class=(activePage === 'empleados' ? 'active' : ''),
+        href="/empleados"
+      )
+        | Empleados
+
+      a.nav-link(
+        class=(activePage === 'novedades' ? 'active' : ''),
+        href="/novedades"
+      )
+        | Novedades
+
+      a.logout-btn(href="/logout")
+        | Cerrar sesión
