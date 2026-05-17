@@ -10,9 +10,9 @@ const guardarDatos = (ruta, datos) => {
     fs.writeFileSync(ruta, JSON.stringify(datos, null, 2));
 };
 
-const crearEmpleado = (req, res) => {
-    const empleados = leerDatos(rutaEmpleados);
-    const empresas = leerDatos(rutaEmpresas);
+const crearEmpleado = async (req, res) => {
+    const empleados = await leerDatos(rutaEmpleados);
+    const empresas = await leerDatos(rutaEmpresas);
 
     const { nombre, apellido, dni, empresa, salario } = req.body;
     const empresaIdRecibido = parseInt(empresa);
@@ -47,9 +47,9 @@ const crearEmpleado = (req, res) => {
 };
 
 //Obtener TODOS los empleados
-const obtenerEmpleados = (req, res) => {
-    const empleados = leerDatos(rutaEmpleados).filter(e => e.activo);
-    const empresas = leerDatos(rutaEmpresas);
+const obtenerEmpleados = async (req, res) => {
+    const empleados = await leerDatos(rutaEmpleados).filter(e => e.activo);
+    const empresas = await leerDatos(rutaEmpresas);
 
     const empleadosConEmpresa = empleados.map(emp => {
         const empresaAsociada = empresas.find(empresa => empresa.id === emp.empresaId);
@@ -61,9 +61,9 @@ const obtenerEmpleados = (req, res) => {
 };
 
 // Obtener UN SOLO empleado por ID 
-const obtenerEmpleadoPorId = (req, res) => {
-    const empleados = leerDatos(rutaEmpleados);
-    const empresas = leerDatos(rutaEmpresas);
+const obtenerEmpleadoPorId = async (req, res) => {
+    const empleados = await leerDatos(rutaEmpleados);
+    const empresas = await leerDatos(rutaEmpresas);
     const idParam = parseInt(req.params.id);
 
     const empleado = empleados.find(e => e.id === idParam && e.activo);
@@ -76,10 +76,10 @@ const obtenerEmpleadoPorId = (req, res) => {
 };
 
 // GET: Mostrar formulario de actualización
-const mostrarFormularioActualizar = (req, res) => {
+const mostrarFormularioActualizar = async (req, res) => {
     const idParam = parseInt(req.params.id);
-    const empleados = leerDatos(rutaEmpleados);
-    const empresas = leerDatos(rutaEmpresas);
+    const empleados = await leerDatos(rutaEmpleados);
+    const empresas = await leerDatos(rutaEmpresas);
 
     const empleado = empleados.find(e => e.id === idParam);
 
@@ -93,9 +93,9 @@ const mostrarFormularioActualizar = (req, res) => {
 };
 
 // PUT: Actualizar empleado por ID
-const actualizarEmpleado = (req, res) => {
-    const empleados = leerDatos(rutaEmpleados);
-    const empresas = leerDatos(rutaEmpresas);
+const actualizarEmpleado = async (req, res) => {
+    const empleados = await leerDatos(rutaEmpleados);
+    const empresas = await leerDatos(rutaEmpresas);
     const idParam = parseInt(req.params.id);
     const { nombre, apellido, dni, empresaId } = req.body;
 
@@ -152,8 +152,8 @@ const actualizarEmpleado = (req, res) => {
 
 };
 
-const eliminarEmpleado = (req, res) => {
-    const empleados = leerDatos(rutaEmpleados);
+const eliminarEmpleado = async (req, res) => {
+    const empleados = await leerDatos(rutaEmpleados);
     const idParam = parseInt(req.params.id);
 
     const existe = empleados.find(e => e.id === idParam);
@@ -173,9 +173,9 @@ const eliminarEmpleado = (req, res) => {
     return res.redirect("/empleados?msg=deleted");
 };
 
-const listarEmpleados = (req, res) => {
-    const empleados = leerDatos(rutaEmpleados);
-    const empresas = leerDatos(rutaEmpresas);
+const listarEmpleados = async (req, res) => {
+    const empleados = await leerDatos(rutaEmpleados);
+    const empresas = await leerDatos(rutaEmpresas);
 
     const empleadosConEmpresa = empleados.map(emp => {
         const empresa = empresas.find(e => e.id === emp.empresaId);
