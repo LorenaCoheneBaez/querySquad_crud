@@ -46,5 +46,29 @@
     "personaContacto": "Montontito Flores",
     "fechaAlta": "2026-04-25T15:14:02.968Z",
     "activo": false
+  },
+  {
+    "id": 1779052075378,
+    "nombre": "TecnoStar",
+    "cuit": "30-12345678-9",
+    "rubro": "Tecnologia",
+    "emailContacto": "q_contrusctora@mail.com.ar",
+    "telefono": "123456",
+    "direccion": "Av. Corrientes 1234, CABA",
+    "personaContacto": "Thomas",
+    "fechaAlta": "2026-05-17T21:07:55.378Z",
+    "activo": true
+  },
+  {
+    "id": 1779052276191,
+    "nombre": "ArthurDodger",
+    "cuit": "20-18582020-8",
+    "rubro": "Salud",
+    "emailContacto": "rrhhsalud@gmail.com",
+    "telefono": "124578912",
+    "direccion": "Siempre Viva 1402 Sidney",
+    "personaContacto": "Jack Dodge",
+    "fechaAlta": "2026-05-17T21:11:16.191Z",
+    "activo": true
   }
 ]

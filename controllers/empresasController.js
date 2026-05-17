@@ -1,27 +1,34 @@
-const fs = require("fs");
+const fs = require("fs").promises;
 const path = require("path");
 const Empresa = require("../models/Empresa");
 
 const rutaArchivo = path.join(__dirname, "../data/empresas.json");
 const rutaEmpleados = path.join(__dirname, "../data/empleados.json");
 
-const leerEmpresas = () => {
-    const data = fs.readFileSync(rutaArchivo, "utf-8");
+const leerEmpresas = async () => {
+    const data = await fs.readFile(rutaArchivo, "utf-8");
     return JSON.parse(data);
+
 };
 
-const guardarEmpresas = (empresas) => {
-    fs.writeFileSync(rutaArchivo, JSON.stringify(empresas, null, 2));
+const guardarEmpresas = async (empresas) => {
+    await fs.writeFile(
+        rutaArchivo,
+        JSON.stringify(empresas, null, 2)
+    );
+
 };
 
-const leerEmpleados = () => {
-    const data = fs.readFileSync(rutaEmpleados, "utf-8");
+const leerEmpleados = async () => {
+    const data = await fs.readFile(rutaEmpleados, "utf-8");
     return JSON.parse(data);
+
 };
+
 
 // POST: Crear empresa 
-const crearEmpresa = (req, res) => {
-    const empresas = leerEmpresas();
+const crearEmpresa = async (req, res) => {
+    const empresas = await leerEmpresas();
     const { nombre, cuit, rubro, emailContacto, telefono, direccion, personaContacto } = req.body;
 
     //validaciones y errores
@@ -70,22 +77,73 @@ const crearEmpresa = (req, res) => {
     res.redirect("/empresas?msg=created");
 };
 
+
+// const crearEmpresa = async (req, res) => {
+//     const empresas = leerEmpresas();
+//     const { nombre, cuit, rubro, emailContacto, telefono, direccion, personaContacto } = req.body;
+
+//     //validaciones y errores
+//     if (!nombre || !cuit || !rubro || !emailContacto || !telefono || !direccion || !personaContacto) {
+//         return res.status(400).json({ 
+//             mensaje: "Error al crear: Por favor complete todos los campos requeridos." 
+//         });
+//     }
+
+//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     if (!emailRegex.test(emailContacto)) {
+//         return res.status(400).json({ 
+//             mensaje: "Error al crear: El formato del email no es válido." 
+//         });
+//     }
+
+//     const cuitRegex = /^\d{2}-\d{8}-\d{1}$/;
+//     if (!cuitRegex.test(cuit)) {
+//         return res.status(400).json({ 
+//             mensaje: "Error al crear: El formato del CUIT debe ser XX-XXXXXXXX-X." 
+//         });
+//     }
+
+//     const telefonoRegex = /^[0-9+\-\s]+$/;
+//     if (!telefonoRegex.test(telefono)) {
+//         return res.status(400).json({ 
+//             mensaje: "Error al crear: El teléfono solo puede contener números, espacios, guiones o el signo '+'." 
+//         });
+//     }
+
+//     const cuitExistente = empresas.find(empresa => empresa.cuit === cuit);
+    
+//     if (cuitExistente) {
+//         return res.status(400).json({ 
+//             mensaje: "Error al crear: Ya existe una empresa con ese CUIT." 
+//         });
+//     }
+
+//     const id = Date.now(); 
+//     const nuevaEmpresa = new Empresa(id, nombre, cuit, rubro, emailContacto, telefono, direccion, personaContacto);
+
+//     nuevaEmpresa.activo = true;
+//     empresas.push(nuevaEmpresa);
+//     guardarEmpresas(empresas);
+    
+//     res.redirect("/empresas?msg=created");
+// };
+
 // GET: Mostrar el formulario
 const mostrarFormularioNuevaEmpresa = (req, res) => {
     res.render("nueva-empresa"); 
 };
 
 // GET: Listado de empresas
-const listarTodasEmpresas = (req, res) => {
-    const empresas = leerEmpresas();
+const listarTodasEmpresas = async (req, res) => {
+    const empresas = await leerEmpresas();
 
     res.render("listado-empresas", { empresas, query: req.query });
 
 };
 
 // GET: Listado de empresas activas
-const listarEmpresasActivas = (req, res) => {
-    const empresas = leerEmpresas();
+const listarEmpresasActivas = async (req, res) => {
+    const empresas = await leerEmpresas();
     const empresasActivas = empresas.filter(empresa => empresa.activo);
 
     res.render("listado-empresas-activas", { 
@@ -95,8 +153,8 @@ const listarEmpresasActivas = (req, res) => {
 };
 
 // GET: Listado de empresas inactivas
-const listarEmpresasInactivas = (req, res) => {
-    const empresas = leerEmpresas();
+const listarEmpresasInactivas = async (req, res) => {
+    const empresas = await leerEmpresas();
     const empresasInactivas = empresas.filter(empresa => !empresa.activo);
 
     res.render("listado-empresas-inactivas", { 
@@ -106,8 +164,8 @@ const listarEmpresasInactivas = (req, res) => {
 };
 
 // Cambiar estado de empresa
-const cambiarEstadoEmpresa = (req, res) => {
-    const empresas = leerEmpresas();
+const cambiarEstadoEmpresa = async (req, res) => {
+    const empresas = await leerEmpresas();
     const idParam = parseInt(req.params.id);
 
     const empresaIndex = empresas.findIndex(e => e.id === idParam);
@@ -126,8 +184,8 @@ const cambiarEstadoEmpresa = (req, res) => {
 };
 
 // PUT: Actualizar empresa
-const actualizarEmpresa = (req, res) => {
-    const empresas = leerEmpresas();
+const actualizarEmpresa = async (req, res) => {
+    const empresas = await leerEmpresas();
     const idParam = parseInt(req.params.id);
 
     const { nombre, cuit, rubro, emailContacto, telefono, direccion, personaContacto } = req.body;
@@ -166,8 +224,8 @@ const actualizarEmpresa = (req, res) => {
 };
 
 // GET: Form editar
-const mostrarFormularioEditarEmpresa = (req, res) => {
-    const empresas = leerEmpresas();
+const mostrarFormularioEditarEmpresa = async (req, res) => {
+    const empresas = await leerEmpresas();
     const idParam = parseInt(req.params.id);
 
     const empresa = empresas.find(e => e.id === idParam);
@@ -180,9 +238,9 @@ const mostrarFormularioEditarEmpresa = (req, res) => {
 };
 
 // DELETE: eliminar empresa
-const eliminarEmpresa = (req, res) => {
-    const empresas = leerEmpresas();
-    const empleados = leerEmpleados();
+const eliminarEmpresa = async (req, res) => {
+    const empresas = await leerEmpresas();
+    const empleados = await leerEmpleados();
     const idParam = parseInt(req.params.id);
 
     const empresaIndex = empresas.findIndex(e => e.id === idParam);
@@ -197,7 +255,7 @@ const eliminarEmpresa = (req, res) => {
 
     if (tieneEmpleados) {
         empresas[empresaIndex].activo = false;
-        guardarEmpresas(empresas);
+        await guardarEmpresas(empresas);
 
         const accept = req.get("accept") || "";
         if (accept.includes("application/json")) {

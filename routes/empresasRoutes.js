@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const validarEmpresa = require("../middlewares/validarEmpresa");
 
 const { 
     crearEmpresa, 
@@ -19,7 +20,9 @@ router.get("/nueva", (req, res) => {
 });
 
 //POST: Alta
-router.post("/", crearEmpresa);
+// router.post("/", crearEmpresa);
+router.post("/", validarEmpresa, crearEmpresa);
+
 //GET: Listado de empresas activas
 router.get("/listado-empresas-activas", listarEmpresasActivas);  
 //GET: Listado de empresas inactivas
