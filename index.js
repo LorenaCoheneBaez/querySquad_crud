@@ -31,3 +31,28 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log("Servidor corriendo en el puerto " + PORT);
 });
+
+app.use(express.urlencoded({ extended: true }));
+
+
+app.post("/login", (req, res) => {
+
+  const { usuario, password } = req.body;
+
+  if (usuario === "admin" && password === "1234") {
+
+    res.redirect("/empresas");
+
+  } else {
+
+    res.redirect("/?error=1");
+
+  }
+
+});
+
+app.get("/logout", (req, res) => {
+
+  res.redirect("/");
+
+});

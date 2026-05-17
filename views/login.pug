@@ -37,6 +37,15 @@ html(lang="es")
         font-weight: 600;
       }
 
+      .input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        box-sizing: border-box;
+      }
+
       .btn {
         width: 100%;
         padding: 12px;
@@ -54,10 +63,57 @@ html(lang="es")
         box-shadow: 0 6px 15px rgba(13,110,253,0.3);
       }
 
+      #loginForm {
+        display: none;
+        margin-top: 20px;
+      }
+
+    script.
+      function mostrarLogin() {
+        document.getElementById("loginForm").style.display = "block";
+        document.getElementById("btnIngresar").style.display = "none";
+      }
+
+      window.onload = function () {
+
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get("error")) {
+
+          alert("Usuario o contraseña incorrectos");
+
+          mostrarLogin();
+        }
+
+      }
+
   body
     .card
       img.logo(src="/img/logo.png", alt="Logo")
+
       div.title ¡Bienvenidos!
 
-      form(action="/empresas", method="GET")
-        button.btn(type="submit") Ingresar
+      button#btnIngresar.btn(
+        type="button",
+        onclick="mostrarLogin()"
+      )
+        | Ingresar
+
+      form#loginForm(action="/login", method="POST")
+
+        input.input(
+          type="text",
+          name="usuario",
+          placeholder="Usuario",
+          required
+        )
+
+        input.input(
+          type="password",
+          name="password",
+          placeholder="Contraseña",
+          required
+        )
+
+        button.btn(type="submit")
+          | Entrar
