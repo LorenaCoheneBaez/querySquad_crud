@@ -20,9 +20,7 @@ router.get("/nueva", (req, res) => {
 });
 
 //POST: Alta
-// router.post("/", crearEmpresa);
 router.post("/", validarEmpresa, crearEmpresa);
-
 //GET: Listado de empresas activas
 router.get("/listado-empresas-activas", listarEmpresasActivas);  
 //GET: Listado de empresas inactivas
